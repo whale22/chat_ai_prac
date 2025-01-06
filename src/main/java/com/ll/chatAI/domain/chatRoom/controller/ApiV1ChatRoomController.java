@@ -20,13 +20,4 @@ public class ApiV1ChatRoomController {
         return roomId + "번 채팅방 조회 완료";
     }
 
-    @GetMapping("{chatRoomId}/messages")
-    public String showChatMessages(@PathVariable Long chatRoomId, @RequestParam String afterChatMessageId) {
-        return chatRoomId + "번 채팅방의 " + afterChatMessageId + "번 메시지 조회 완료";
-    }
-
-    @PostMapping("{chatRoomId}/messages")
-    public String showChatMessages(@PathVariable Long chatRoomId) {
-        return chatRoomId + "번 채팅방의 메시지 조회 완료";
-    }
 }
