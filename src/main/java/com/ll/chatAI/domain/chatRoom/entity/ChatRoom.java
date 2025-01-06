@@ -13,6 +13,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString(callSuper = true)
 public class ChatRoom extends BaseEntity {
+    private String name; //채팅방 이름
+
     public ChatRoom () {
     }
 }
