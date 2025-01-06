@@ -17,8 +17,9 @@ import lombok.experimental.SuperBuilder;
 public class ChatMessage extends BaseEntity {
     public ChatMessage() {
     }
-    private String author; //채팅 작성자
-    private String message; //채팅 메시지
+
+    private String writerName; //채팅 작성자
+    private String content; //채팅 메시지
 
     @ManyToOne
     private ChatRoom chatRoom; //채팅방
