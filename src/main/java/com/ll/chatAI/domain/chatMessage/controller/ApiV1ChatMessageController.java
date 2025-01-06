@@ -1,4 +1,4 @@
-package com.ll.chatAI.chatController;
+package com.ll.chatAI.domain.chatMessage.controller;
 
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +11,10 @@ import java.util.Map;
 
 @RequestMapping("/api/v1/chat")
 @RestController
-public class ChatController {
+public class ApiV1ChatMessageController {
     private final OpenAiChatModel openAiChatModel;
 
-    public ChatController(OpenAiChatModel openAiChatModel) {
+    public ApiV1ChatMessageController(OpenAiChatModel openAiChatModel) {
         this.openAiChatModel = openAiChatModel;
     }
 
