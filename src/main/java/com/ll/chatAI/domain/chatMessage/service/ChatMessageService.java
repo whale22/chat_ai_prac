@@ -6,6 +6,8 @@ import com.ll.chatAI.domain.chatRoom.entity.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ChatMessageService {
@@ -21,5 +23,10 @@ public class ChatMessageService {
         chatMessageRepository.save(chatMessage);
 
         return chatMessage;
+    }
+
+    public List<ChatMessage> getAllByChatRoomId(Long roomId) {
+        List<ChatMessage> chatMessages = chatMessageRepository.findAllById(roomId);
+        return chatMessages;
     }
 }

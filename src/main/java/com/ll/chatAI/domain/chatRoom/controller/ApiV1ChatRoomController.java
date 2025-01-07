@@ -1,5 +1,7 @@
 package com.ll.chatAI.domain.chatRoom.controller;
 
+import com.ll.chatAI.domain.chatMessage.service.ChatMessageService;
+import com.ll.chatAI.domain.chatRoom.dto.RequestCreateRoom;
 import com.ll.chatAI.domain.chatRoom.entity.ChatRoom;
 import com.ll.chatAI.domain.chatRoom.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 )
 public class ApiV1ChatRoomController {
     private final ChatRoomService chatRoomService;
+    private final ChatMessageService chatMessageService;
 
     @GetMapping
     public List<ChatRoom> getChatRooms() {
@@ -22,14 +25,11 @@ public class ApiV1ChatRoomController {
         return ChatRooms;
     }
 
-    @GetMapping("/api/v1/chat/rooms/{roomId}")
-    public String getChatRoom(@PathVariable("roomId") Long roomId) {
-        return roomId + "번 채팅방 조회완료";
-    }
 
     @PostMapping
-    public String createChatRoom() {
-        return "채팅방 생성완료";
+    public ChatRoom createChatRoom(@RequestBody RequestCreateRoom requestCreateRoom) {
+        ChatRoom chatRoom = chatRoomService.create(requestCreateRoom.getName());
+        return chatRoom;
     }
 
 }

@@ -22,6 +22,10 @@ public class ChatRoom extends BaseEntity {
     @OneToMany
     private List<ChatMessage> chatMessages; //채팅방의 채팅 메시지들
 
+    public ChatRoom() {
+        this.name = "default";
+    }
+
     public ChatRoom(String name) {
         this.name = name;
     }
