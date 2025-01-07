@@ -26,7 +26,12 @@ public class ChatMessageService {
     }
 
     public List<ChatMessage> getAllByChatRoomId(Long roomId) {
-        List<ChatMessage> chatMessages = chatMessageRepository.findAllById(roomId);
+        List<ChatMessage> chatMessages = chatMessageRepository.findByChatRoom_id(roomId);
+        return chatMessages;
+    }
+
+    public List<ChatMessage> getAllByChatRoomIdAndAfterId(Long roomId, long afterChatMessageId) {
+        List<ChatMessage> chatMessages = chatMessageRepository.findByChatRoomIdAndIdAfter(roomId, afterChatMessageId);
         return chatMessages;
     }
 }

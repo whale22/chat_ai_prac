@@ -3,6 +3,7 @@ package com.ll.chatAI.domain.chatMessage.entity;
 import com.ll.chatAI.domain.chatRoom.entity.ChatRoom;
 import com.ll.chatAI.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,6 @@ public class ChatMessage extends BaseEntity {
     private String content; //채팅 메시지
 
     @ManyToOne
+    @JoinColumn(name = "room_id", referencedColumnName = "id", nullable = false)
     private ChatRoom chatRoom; //채팅방
 }

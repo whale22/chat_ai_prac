@@ -1,31 +1,38 @@
 package com.ll.chatAI.domain.chatMessage.controller;
 
+import com.ll.chatAI.domain.chatMessage.dto.RequestCreateMessage;
+import com.ll.chatAI.domain.chatMessage.entity.ChatMessage;
+import com.ll.chatAI.domain.chatMessage.service.ChatMessageService;
+import com.ll.chatAI.domain.chatRoom.service.ChatRoomService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/api/v1/chat/rooms")
 @RestController
+@CrossOrigin(
+        origins = "https://cdpn.io"
+)
+@RequestMapping("/api/v1/chat/rooms")
+@RequiredArgsConstructor
 public class ApiV1ChatMessageController {
     private final OpenAiChatModel openAiChatModel;
+    private final ChatMessageService chatMessageService;
+    private final ChatRoomService chatRoomService;
 
-    @GetMapping("/{roomId}/messages")
-    public String getChatMessages(@PathVariable Long roomId, @RequestParam long afterChatMessageId) {
-
-        return roomId + "번 채팅방의 메시지 조회 완료 / id :" + afterChatMessageId;
+    @GetMapping("/{chatRoomId}/messages")
+    public List<ChatMessage> getChatMessages(@PathVariable Long chatRoomId, @RequestParam long afterChatMessageId) {
+        List<ChatMessage> chatMessages = chatMessageService.getAllByChatRoomIdAndAfterId(chatRoomId, afterChatMessageId);
+        return chatMessages;
     }
 
-    @PostMapping("{roomId}/messages")
-    public String showChatMessages(@PathVariable Long chatRoomId) {
-        return chatRoomId + "번 채팅방 메시지 조회 완료";
-    }
-
-
-
-    public ApiV1ChatMessageController(OpenAiChatModel openAiChatModel) {
-        this.openAiChatModel = openAiChatModel;
+    @PostMapping("/{chatRoomId}/messages")
+    public ChatMessage showChatMessages(@PathVariable Long chatRoomId, @RequestBody RequestCreateMessage requestCreateMessage) {
+        ChatMessage chatMessage = chatMessageService.create(chatRoomService.getChatRoom(chatRoomId), requestCreateMessage.getWriterName(), requestCreateMessage.getContent());
+        return chatMessage;
     }
 
     @GetMapping("/ai")

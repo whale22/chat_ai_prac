@@ -25,6 +25,12 @@ public class ApiV1ChatRoomController {
         return ChatRooms;
     }
 
+    @GetMapping("/{roomId}")
+    public ChatRoom getChatRoom(@PathVariable Long roomId) {
+        ChatRoom ChatRoom = chatRoomService.getChatRoom(roomId);
+        return ChatRoom;
+    }
+
 
     @PostMapping
     public ChatRoom createChatRoom(@RequestBody RequestCreateRoom requestCreateRoom) {
