@@ -154,7 +154,7 @@ public class ArticleServiceTest {
     @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
     @Test
     void t13() {
-        List<ArticleTag> articleTags = articleTagService.findByAuthorUsername("user1");
+        List<ArticleTag> articleTags = xarticleTagService.findByAuthorUsername("user1");
 
         assertThat(articleTags.size()).isGreaterThan(0);
     }
