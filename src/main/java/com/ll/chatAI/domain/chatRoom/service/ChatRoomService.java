@@ -29,4 +29,5 @@ public class ChatRoomService {
     public ChatRoom getChatRoom(Long roomId) {
         return chatRoomRepository.findById(roomId).orElse(null);
     }
+
 }
